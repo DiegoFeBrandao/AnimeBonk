@@ -1,0 +1,10 @@
+Grass
+Sandstone
+LeafyGrass
+Mud
+Ground
+Rock
+Basalt
+Cobblestone
+Slate
+Pavement

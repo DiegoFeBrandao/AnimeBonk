@@ -1,0 +1,17 @@
+# Places do Roblox (a fonte da verdade é o place publicado, não arquivo local)
+*.rbxl
+*.rbxlx
+*.rbxl.lock
+*.rbxlx.lock
+
+# Rascunho de execução de planos (superpowers)
+.superpowers/
+
+# Configuração pessoal do Claude Code
+.claude/settings.local.json
+
+# Configuração pessoal do Obsidian (o vault é a raiz do projeto)
+.obsidian/
+
+# Pedaços temporários de envio de imagens pro Studio (os .png originais ficam no repositório)
+arte/**/*.p[0-9]
