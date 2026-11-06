@@ -1531,4 +1531,6 @@ nada está salvo** — o Diego testa, dá Ctrl+S e publica os 2 places juntos (o
   `.superpowers/sdd/2026-10-29-etapa1-partida-minima/progress.md` (linhas "minor").
 - Criar o grupo do Roblox e a experiência (2 places: Menu e Partida) e registrar IDs aqui.
 - Criar o(s) place(s) e registrar placeIds aqui.
-- Criar repositório privado da documentação + hook de auto-push (modelo do Table_Stories).
+- FEITO 2026-11-05: repositório privado `DiegoFeBrandao/AnimeBonk` (documentação e arte; o código segue nos places),
+  pro desenvolvimento em dupla. Sem hook de auto-push: as regras de pull antes de mexer e push ao fim de cada feature
+  estão no `CLAUDE.md` (seção Git / GitHub).
