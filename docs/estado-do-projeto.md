@@ -1510,8 +1510,12 @@ importantes, 0 menores; nada rodou em Play, nada salvo; `Config` e `PtBr` idênt
 - **Falha achada e corrigida (F1)**: em pt-br, `Translator:Translate` de texto sem par na tabela troca "." por "," (aviso já
   traduzido saía "…este mapa,"). `LocalizacaoController.traduzir` (idêntico nos 2 places) devolve o original quando a única
   diferença é essa troca; conferido em Play com o tradutor real.
-- **O `TesteLogica` não roda sozinho na carga** em nenhum dos 2 places: rodar à mão no Server DM com
-  `require(game.ServerScriptService.Server.Testes.TesteLogica)()` (deu OK nos dois).
+- **`TesteLogica` na carga (2026-11-24)**: o Script `Server` dos 2 places roda o `TesteLogica` no fim do boot, só no Studio
+  (`RunService:IsStudio()`, em `task.spawn` + `pcall`). Conferido em Play na Partida (`TesteLogica: OK` no Output); no Menu
+  compila, mas o Play não foi rodado depois da mudança.
+- **Remover com dois toques (2026-11-24)**: em `Telas.Coop`, o 1º toque no "X" arma (marca vira "?" + aviso "Tap again to
+  remove.") por `Config.SalaRemoverConfirmarSegundos` (3); o 2º, no mesmo membro e no prazo, manda o `SalaExpulsar`. Se a
+  lista anda, o toque volta a ser o 1º. `Config` e `PtBr` idênticos nos 2 places. Só testável com 2 contas.
 - **Não coberto** (Diego): concessão do drop de skin (perfil em memória recusa; com API Services ligado grava no perfil
   real), tudo que exige 2 contas (cadeado com nome, remover de verdade, busca com removido, poças pra quem entra, lama vista
   por aliado), troca de mapa/dificuldade na sala, celular.
