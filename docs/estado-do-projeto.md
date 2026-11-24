@@ -1498,6 +1498,26 @@ importantes, 0 menores; nada rodou em Play, nada salvo; `Config` e `PtBr` idênt
 - **Suspeitas de runtime**: chip "Slowed" perto dos controles em tela estreita/celular; legibilidade das partículas de lama
   junto das outras auras.
 
+**Playtest pelo Claude em Play (2026-11-24, autorizado pelo Diego; 1 jogador, perfil só em memória)** — relatórios em
+`.superpowers/sdd/2026-11-23-sala-pendencias/playtest.md` e `.superpowers/sdd/2026-11-24-melhorias-partida/playtest.md`:
+
+- **Menu**: 11 itens passaram (criar sala, retrato → Heroes, Start bloqueado com aviso, chips inativos, modo com reenvio da
+  janela, Leave/Create com "Please wait a moment.", código inválido, Quick match, `SalaExpulsar` com payload inválido,
+  44 checagens da `Logica/Sala`, regressão das telas); nenhum erro de script.
+- **Partida**: lama/lentidão (×0.60, chip, aura, limpezas em queda/chefe morto/fim/Play Again, pausa por carta descontada),
+  3 poças da Giant Slug, Marionete parando em 20/20 e zerando na troca de zona, chance do drop 0.0040 → 0.0120 no Eclipse,
+  run de regressão; nenhum erro de script.
+- **Falha achada e corrigida (F1)**: em pt-br, `Translator:Translate` de texto sem par na tabela troca "." por "," (aviso já
+  traduzido saía "…este mapa,"). `LocalizacaoController.traduzir` (idêntico nos 2 places) devolve o original quando a única
+  diferença é essa troca; conferido em Play com o tradutor real.
+- **O `TesteLogica` não roda sozinho na carga** em nenhum dos 2 places: rodar à mão no Server DM com
+  `require(game.ServerScriptService.Server.Testes.TesteLogica)()` (deu OK nos dois).
+- **Não coberto** (Diego): concessão do drop de skin (perfil em memória recusa; com API Services ligado grava no perfil
+  real), tudo que exige 2 contas (cadeado com nome, remover de verdade, busca com removido, poças pra quem entra, lama vista
+  por aliado), troca de mapa/dificuldade na sala, celular.
+- Observações: título "Your team · 1/4" usa `Sala.MAX` mesmo em sala Duo; `CaidoGui.Enabled` fica true depois do `cair` no
+  solo (sem filho visível); a poça do Qa `lama` não tem dono e não some com chefe morto.
+
 **Continuam não feitos**: Quick match mostrar o modo (decisão do Diego).
 
 ## Como retomar (atualizado em 2026-11-04, madrugada — JOGO "PRONTO" v1 com 3 mapas)
