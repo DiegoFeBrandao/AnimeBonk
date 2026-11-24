@@ -1441,6 +1441,52 @@ nada está salvo** — o Diego testa, dá Ctrl+S e publica os 2 places juntos (o
   líder reenvia o mesmo valor; controles inativos ainda animam no clique; alvos de toque pequenos no celular ("Change");
   busca de nome repetida; lacunas no `TesteSala`.
 
+### Pendências de código fechadas (2026-11-23, agentes; implementador + revisor por lote)
+
+Implementado e revisado por leitura nos 2 places em modo Edit; **nada rodou em Play e nada está salvo** — o Diego testa, dá
+Ctrl+S e publica os 2 places juntos (o `Shared` mudou nos dois; conferido idêntico por bytes + hash, tudo compila no
+`loadstring`). Perfil continua **v9** (sem mudança de schema).
+
+**Lote Sala (Menu)** — ledger e revisão em `.superpowers/sdd/2026-11-23-sala-pendencias/`:
+
+- **Cadeado por membro**: cada servidor grava na sala o resumo do membro (`liberados { mapas, difs }`, lido do perfil no
+  servidor em criar/entrar/pronto/config/início). `Logica/Sala.podeIniciar(sala, userId, min?, destino?)` recusa quando algum
+  membro não tem o destino efetivo (Survival/Mutação contam o mapa padrão; Mutação a dificuldade fixa) e `SalaInfo.falta
+  { userId, tipo }` leva quem falta pra tela ("<name> hasn't unlocked this map." / "... this difficulty."). Modo não tem
+  desbloqueio no perfil, então fica fora. Membro sem resumo conta como faltando. A regra da Partida ("algum membro") não mudou.
+- **Quick match** não coloca na sala pública quem não tem o destino nem quem foi removido dela (`Sala.entraPelaBusca`,
+  `expulsos` com teto `Config.SalaExpulsosMax`); por código entra normalmente.
+- **Expulsar membro**: remote `SalaExpulsar { userId }` (só líder, estado "lobby", validado, rate-limit `RateLimitSala`,
+  decisão no `UpdateAsync` com `Sala.expulsar`); mensagem entre servidores com o campo `ex`; o removido volta pra tela Co-op
+  com "You were removed from the room.". Botão "X" no cartão dos outros, só pro líder, sem confirmação.
+- **Menores da revisão de 2026-11-05 fechados**: sala sumida/expirada tira da tela com "Room not found." (pronto, config,
+  expulsar, iniciar); `Sala.configurar` só zera o pronto se o destino muda de fato; controles inativos com
+  `Interactable = false` e Start apagado mostra o motivo; retrato inteiro do próprio cartão abre Heroes (`AreaTrocar`);
+  `nomeDe` não repete busca em andamento/falha (`Config.SalaNomeFalhaSegundos`); `TesteSala` cobre as lacunas + cadeado +
+  expulsar + busca.
+- **Abertos** (`review.md`): publicar o Menu com "Restart servers for updates" (membro em servidor antigo não grava o resumo
+  e trava o Start até reentrar); `Sala.valida` não confere o conteúdo de `liberados`; suspeitas de runtime (hover do Juice em
+  controle inativo, encaixe do "X", clique no retrato passando pelos selos, nome longo no texto do bloqueio).
+
+**Lote Partida** — ledger e revisão em `.superpowers/sdd/2026-11-23-lesma-skin/`:
+
+- **Lama da Giant Slug**: a lama não existia como área; os círculos do padrão "chuva" agora viram **poças** no impacto
+  (`Definicoes/Chefes`: `PadraoChefe.lama { duracao 6, multVel 0.6, residual 1 }`, teto `Config.ChefeLamaMax` 12). O laço do
+  `ChefeSystem` aplica `HeroiSystem.lentidao(player, mult, duracao)` em herói vivo dentro; o `travarMovimento` compõe com o
+  `multVel`. Limpa no prazo, dono morto, troca de zona, fim/reinício, queda e escolha de herói. Cliente: disco marrom no
+  `AvisoController` (pasta `workspace.AvisosLama`, criado/apagado por id via remote `Aviso`). **Decisão em aberto do Diego**:
+  manter a poça ou trocar por lentidão só ao ser atingido.
+- **Drop de skin rara**: `Systems/SkinDropSystem` (novo) — elite (não chefe) morto → cada herói vivo rola
+  `Config.SkinDropChance` (0.004) × `Config.EclipseSkinMult` no Eclipse; concede uma skin paga não possuída do herói em uso
+  (`Logica/Perfil.concederSkin`, sem equipar), máx. `Config.SkinDropMaxPorRun` (1) por jogador por run. Não concede com
+  perfil não carregado/somente leitura/travado ou herói fora de `perfil.desbloqueios`. Toast "Rare skin unlocked: <nome>"
+  pelo remote `Conquista` (`id = "skin"`, chave `toast.skinRara`).
+- **Qa novos**: `lama`, `lento`, `skinDrop` (este grava no perfil de verdade se o API Services estiver ligado).
+- **Abertos** (`review.md`): sem indicador visual de lentidão no herói; quem entra no meio da luta não vê poças existentes;
+  `HeroiSystem.lentidao` junta o multiplicador mais forte com o prazo mais longo (só importa com uma 2ª lama).
+
+**Continuam não feitos**: Quick match mostrar o modo (decisão do Diego); Marionete invocando demais (balanceamento).
+
 ## Como retomar (atualizado em 2026-11-04, madrugada — JOGO "PRONTO" v1 com 3 mapas)
 
 - **Primeiro**: Ctrl+S e publicar os 2 places JUNTOS (Shared mudou muito nos dois; perfil **v9**; mapas 2 e 3, PtBr 1401 pares;
