@@ -1515,8 +1515,10 @@ importantes, 0 menores; nada rodou em Play, nada salvo; `Config` e `PtBr` idênt
 - **Não coberto** (Diego): concessão do drop de skin (perfil em memória recusa; com API Services ligado grava no perfil
   real), tudo que exige 2 contas (cadeado com nome, remover de verdade, busca com removido, poças pra quem entra, lama vista
   por aliado), troca de mapa/dificuldade na sala, celular.
-- Observações: título "Your team · 1/4" usa `Sala.MAX` mesmo em sala Duo; `CaidoGui.Enabled` fica true depois do `cair` no
-  solo (sem filho visível); a poça do Qa `lama` não tem dono e não some com chefe morto.
+- **Título da equipe corrigido**: `Telas.Coop` usa `s.tamanhoMax or Sala.MAX` em "Your team · N/M" (sala Duo mostra /2);
+  retestado em Play (4 vagas, Duo, Trio, Squad, Off e Find match Duo).
+- Observações: `CaidoGui.Enabled` fica true de propósito (contêiner fixo da bússola e da tela de caído no
+  `EquipeController`); a poça do Qa `lama` não tem dono e não some com chefe morto.
 
 **Continuam não feitos**: Quick match mostrar o modo (decisão do Diego).
 
