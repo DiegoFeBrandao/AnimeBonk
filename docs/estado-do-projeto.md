@@ -1482,10 +1482,23 @@ Ctrl+S e publica os 2 places juntos (o `Shared` mudou nos dois; conferido idênt
   perfil não carregado/somente leitura/travado ou herói fora de `perfil.desbloqueios`. Toast "Rare skin unlocked: <nome>"
   pelo remote `Conquista` (`id = "skin"`, chave `toast.skinRara`).
 - **Qa novos**: `lama`, `lento`, `skinDrop` (este grava no perfil de verdade se o API Services estiver ligado).
-- **Abertos** (`review.md`): sem indicador visual de lentidão no herói; quem entra no meio da luta não vê poças existentes;
-  `HeroiSystem.lentidao` junta o multiplicador mais forte com o prazo mais longo (só importa com uma 2ª lama).
+- **Abertos** (`review.md`): `HeroiSystem.lentidao` junta o multiplicador mais forte com o prazo mais longo (só importa com uma 2ª lama).
 
-**Continuam não feitos**: Quick match mostrar o modo (decisão do Diego); Marionete invocando demais (balanceamento).
+**Lote Melhorias da Partida (2026-11-24)** — ledger e revisão em `.superpowers/sdd/2026-11-24-melhorias-partida/` (revisão: 0
+importantes, 0 menores; nada rodou em Play, nada salvo; `Config` e `PtBr` idênticos nos 2 places):
+
+- **Indicador de lentidão**: atributo `Lento` (true/nil) no Player, escrito pelo `HeroiSystem` só na mudança de estado (liga em
+  `lentidao`; desliga no prazo, queda, `limparLentidao`, `escolher`, `resetarTodos`). `HeroiSpriteController`: partículas de
+  lama (`AuraLento`) no herói, visíveis pra todos. `HudController`: chip "Slowed" à direita da barra de HP do jogador local.
+- **Poças pra quem entra no meio**: `ChefeSystem` manda as poças vivas só pro jogador novo (remote `Aviso`, no `PlayerAdded`
+  e no 1º `CharacterAdded`).
+- **Marionete**: teto global `Config.MarioneteInvocacoesPorMin` (20) no `InimigoSystem`, contando **marionetes invocadas**
+  (cada titereiro invoca 3 por ciclo), janela deslizante de 60 s em anel fixo; zera no `limparTudo` (troca de zona, início,
+  Play Again), então na prática é "20 por minuto dentro da zona". Valor a calibrar pelo Diego. Qa novo: `marionete`.
+- **Suspeitas de runtime**: chip "Slowed" perto dos controles em tela estreita/celular; legibilidade das partículas de lama
+  junto das outras auras.
+
+**Continuam não feitos**: Quick match mostrar o modo (decisão do Diego).
 
 ## Como retomar (atualizado em 2026-11-04, madrugada — JOGO "PRONTO" v1 com 3 mapas)
 
