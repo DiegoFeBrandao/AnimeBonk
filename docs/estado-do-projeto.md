@@ -1526,6 +1526,27 @@ importantes, 0 menores; nada rodou em Play, nada salvo; `Config` e `PtBr` idênt
 - Observações: `CaidoGui.Enabled` fica true de propósito (contêiner fixo da bússola e da tela de caído no
   `EquipeController`); a poça do Qa `lama` não tem dono e não some com chefe morto.
 
+**Lote Impacto visual: ultimates + puff do teleporte (2026-11-24)** — ledger e revisão em
+`.superpowers/sdd/2026-11-24-visual-ultimates/` (revisão: 0 importantes; 4 menores corrigidos). **Não rodou em Play** e nada
+está salvo; `Config`, `Definicoes/Golpes` e `Definicoes/Ultimates` idênticos nos 2 places.
+
+- **Dados**: `GolpeDef.desenho: string?` (o campo `visual` já existia pro estilo); as 9 versões em `Definicoes/Ultimates` têm
+  `desenho` (`explosaoKi`, `meteoro`, `raioCelestial`, `socoCanhao`, `chuvaPunhos`, `martelo`, `milClones`, `uivoLobo`,
+  `feraLibertada`). `TesteLogica` exige o campo nas 9.
+- **Cliente (Partida)**: `Controllers/EfeitosController/UltimateVisuais` (ModuleScript filho, não é controller): tabela
+  id → `{ forma, desenhar }`. O `EfeitosController.aoEfeito` usa o desenhista se `def.desenho` existe e a forma bate; senão
+  (ou se o desenhista der erro: `pcall` + `warn` + solta as peças) cai no desenho padrão por estilo. Peças do pool existente
+  (`pegarEf`), teto `Config.UltimateVisualMaxPecas` (40) por uso, só tweens/`task.delay`, `limparUltimates` no `limparTudo`
+  (troca de zona, fim, reinício). Atributo de QA `UltPecas` em `workspace.Efeitos`. Servidor e payloads não mudaram.
+- **Puff do teleporte**: `InimigoRenderController.aoSnapshot` trata salto > `Config.TeleportePuffSaltoMin` (12) num inimigo
+  de comportamento `teleporte` como teleporte: snap + fumaça na origem e no destino (pool `AncoraPuff` em
+  `workspace.InimigosVisual`, `TeleportePuffMax` 12, `TeleportePuffDuracao`, `TeleportePuffParticulas`; atributo `Puffs`).
+- **Abertos**: aparência (Diego avalia; Ki Burst e Crimson Meteor desenham esfera de 36–48 studs que pode cobrir a câmera);
+  ticks continuam desenhados se o herói morre no meio do Celestial Beam / Beast Unleashed; nas 4 áreas em volta do herói o
+  dono é o jogador mais perto da origem (só afeta a direção do lobo); sem comando Qa pra encher a carga da ultimate.
+- **Observação**: o Workspace da Partida (Edit) tem o atributo `EscalaInimigos = 2.5` salvo, de origem desconhecida
+  (nenhum script escreve 2.5; o servidor regrava a cada zona).
+
 **Continuam não feitos**: Quick match mostrar o modo (decisão do Diego).
 
 ## Como retomar (atualizado em 2026-11-04, madrugada — JOGO "PRONTO" v1 com 3 mapas)
