@@ -1527,8 +1527,8 @@ importantes, 0 menores; nada rodou em Play, nada salvo; `Config` e `PtBr` idênt
   `EquipeController`); a poça do Qa `lama` não tem dono e não some com chefe morto.
 
 **Lote Impacto visual: ultimates + puff do teleporte (2026-11-24)** — ledger e revisão em
-`.superpowers/sdd/2026-11-24-visual-ultimates/` (revisão: 0 importantes; 4 menores corrigidos). **Não rodou em Play** e nada
-está salvo; `Config`, `Definicoes/Golpes` e `Definicoes/Ultimates` idênticos nos 2 places.
+`.superpowers/sdd/2026-11-24-visual-ultimates/` (revisão: 0 importantes; 4 menores corrigidos). Rodou em Play depois (ver "Testado em Play" abaixo);
+conferir se os 2 places foram salvos/publicados; `Config`, `Definicoes/Golpes` e `Definicoes/Ultimates` idênticos nos 2 places.
 
 - **Dados**: `GolpeDef.desenho: string?` (o campo `visual` já existia pro estilo); as 9 versões em `Definicoes/Ultimates` têm
   `desenho` (`explosaoKi`, `meteoro`, `raioCelestial`, `socoCanhao`, `chuvaPunhos`, `martelo`, `milClones`, `uivoLobo`,
@@ -1544,6 +1544,13 @@ está salvo; `Config`, `Definicoes/Golpes` e `Definicoes/Ultimates` idênticos n
 - **Abertos**: aparência (Diego avalia; Ki Burst e Crimson Meteor desenham esfera de 36–48 studs que pode cobrir a câmera);
   ticks continuam desenhados se o herói morre no meio do Celestial Beam / Beast Unleashed; nas 4 áreas em volta do herói o
   dono é o jogador mais perto da origem (só afeta a direção do lobo); sem comando Qa pra encher a carga da ultimate.
+- **Testado em Play pelo Claude (2026-11-24, autorizado; 1 jogador, Partida)**: as 9 ultimates usadas pelo caminho real
+  (carga enchida com dano, `UsarUltimate`, payload do servidor) com Ryuga, Kaizo e Haruto nos despertares 0/1/2: todas
+  desenharam com o visual próprio (`UltPecas` > 0 durante o uso) e voltaram a 0 no fim; nenhum
+  `[Efeitos] desenho de ultimate ... falhou` e nenhum erro de script no log do cliente. Troca de zona no meio do
+  Beast Unleashed: `UltPecas` 10 → 0 na hora. Puff: no Santuário (inimigos de `teleporte`) a `AncoraPuff` foi criada com
+  4 emissores (`Puffs` = emissores criados, não ativos). `UltPecas` é amostrado 2×/s, então não serve pra conferir o
+  total exato de peças por uso. **Não coberto**: aparência (ninguém olhou a tela), co-op, celular.
 - **Observação**: o Workspace da Partida (Edit) tem o atributo `EscalaInimigos = 2.5` salvo, de origem desconhecida
   (nenhum script escreve 2.5; o servidor regrava a cada zona).
 
