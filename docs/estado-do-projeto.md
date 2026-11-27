@@ -1556,6 +1556,11 @@ conferir se os 2 places foram salvos/publicados; `Config`, `Definicoes/Golpes` e
 
 **Continuam não feitos**: Quick match mostrar o modo (decisão do Diego).
 
+**Importação dos modelos 3D (2026-11-26, só planejado)**: o Diego criou no Claude Design objetos (baús, recursos, chakra
+stones, estruturas) e personagens com animações e VFX. Nada importado ainda; formato combinado (GLB com animações dentro),
+regras do Roblox conferidas e o prompt de exportação estão em `docs/importacao-modelos-3d.md`. Próximo passo: testar com um
+baú e um personagem antes do resto.
+
 ## Como retomar (atualizado em 2026-11-04, madrugada — JOGO "PRONTO" v1 com 3 mapas)
 
 - **Primeiro**: Ctrl+S e publicar os 2 places JUNTOS (Shared mudou muito nos dois; perfil **v9**; mapas 2 e 3, PtBr 1401 pares;
